@@ -1,0 +1,63 @@
+# Probe Deployment: systemd
+
+This guide will walk you through deploying an IPMN probe using the precompiled binary and systemd.
+
+### Prerequisites
+
+- A registered probe in the [IPMN App](https://app.ipmn.io) with a unique Probe ID (UUID) and authentication token (SECRET).
+- A Linux system with systemd installed.
+
+### Deployment Steps
+
+1.  **Download the precompiled binary**: Visit the probe [releases](https://github.com/ipmn/probe/releases) page and download the appropriate precompiled binary for your system.
+
+1.  **Make the binary executable**: Move the binary to a suitable location, such as /usr/local/bin/, and make it executable with the following command:
+
+    ```bash copy
+    chmod +x /usr/local/bin/ipmn-probe
+    ```
+
+1.  **Create a systemd service file**: Create a new systemd service file at /etc/systemd/system/ipmn-probe.service with the following content:
+
+    ```ini copy
+    [Unit]
+    Description=IPMN Probe
+    After=network.target
+
+    [Service]
+    Environment="UUID=<Probe_UUID>"
+    Environment="SECRET=<Authentication_Token>"
+    ExecStart=/usr/local/bin/ipmn-probe
+    Restart=always
+    User=root
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+
+    Replace `Probe_UUID` and `Authentication_Token` with the Probe ID and authentication token you received when registering your probe.
+
+1.  **Reload systemd**: Inform systemd of the new service file and enable it to start automatically at boot:
+
+        ```bash copy
+        sudo systemctl daemon-reload
+        sudo systemctl enable ipmn-probe.service
+        ```
+
+1.  **Start the IPMN probe**: Start the IPMN probe service with the following command:
+
+    ```bash copy
+    sudo systemctl start ipmn-probe.service
+    ```
+
+1.  **Verify the probe is running**: Check the status of the IPMN probe service:
+    ```bash copy
+    sudo systemctl status ipmn-probe.service
+    ```
+    If everything is set up correctly, you should see the service running and active.
+
+Your IPMN probe is now deployed and running as a systemd service. The probe will execute assigned tasks and submit the results to the IPMN, contributing valuable data to the platform.
+
+```
+
+```
