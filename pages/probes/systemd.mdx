@@ -56,8 +56,35 @@ This guide will walk you through deploying an IPMN probe using the precompiled b
     ```
     If everything is set up correctly, you should see the service running and active.
 
+### Updating the IPMN Probe
+
+To update the IPMN probe to the latest version, follow these steps:
+
+1. **Stop the IPMN probe service**: Stop the running IPMN probe service with the following command:
+
+   ```bash copy
+   sudo systemctl stop ipmn-probe.service
+   ```
+
+1. **Download the latest IPMN probe binary**: Download the latest precompiled IPMN probe binary from the [releases](https://github.com/ipmn/probe/releases) page.
+
+1. **Replace the existing binary**: Replace the existing IPMN probe binary with the new one you just downloaded. Ensure that the file permissions are set to make it executable:
+
+   ```bash copy
+   mv /path/to/new-ipmn-probe /usr/local/bin/ipmn-probe
+   chmod +x /usr/local/bin/ipmn-probe
+   ```
+
+1. **Start the updated IPMN probe**: Start the updated IPMN probe service with the following command:
+
+   ```bash copy
+   sudo systemctl start ipmn-probe.service
+   ```
+
+1. **Verify the updated probe is running**: Check the status of the updated IPMN probe service:
+   ```bash copy
+   sudo systemctl status ipmn-probe.service
+   ```
+   You should see the service running and active with the updated binary.
+
 Your IPMN probe is now deployed and running as a systemd service. The probe will execute assigned tasks and submit the results to the IPMN, contributing valuable data to the platform.
-
-```
-
-```

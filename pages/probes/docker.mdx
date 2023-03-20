@@ -31,4 +31,33 @@ This guide will walk you through deploying an IPMN probe using Docker.
    ```
    This will display the container's logs, which can be helpful for troubleshooting or monitoring the probe's activity.
 
-Your IPMN probe is now deployed and running as a Docker container. The probe will execute assigned tasks and submit the results to the IPMN App, contributing valuable data to the platform.
+### Updating the IPMN Probe
+
+To update the IPMN probe to the latest version, follow these steps:
+
+1. **Pull the latest IPMN probe Docker image**: Pull the latest official IPMN probe image from the GitHub Container Registry using the following command:
+
+   ```bash copy
+   docker pull ghcr.io/ipmn/probe:latest
+   ```
+
+1. **Stop and remove the existing IPMN probe container**: Stop and remove the running IPMN probe container with the following commands:
+
+   ```bash copy
+   docker stop ipmn-probe
+   docker rm ipmn-probe
+   ```
+
+1. **Re-run the IPMN probe container with the updated image**: Run a new Docker container with the updated IPMN probe image, using the same Probe ID and authentication token as before:
+
+   ```bash copy
+   docker run -d --restart always --name ipmn-probe -e UUID=<Probe_UUID> -e SECRET=<Authentication_Token> ghcr.io/ipmn/probe:latest
+   ```
+
+1. **Verify the updated probe is running**: Check the status of the updated IPMN probe container:
+   ```bash copy
+   docker ps -f name=ipmn-probe
+   ```
+   You should see the container running and active with the updated image.
+
+Your IPMN probe is now deployed and running as a Docker container. The probe will execute assigned tasks and submit the results to the IPMN, contributing valuable data to the platform.
