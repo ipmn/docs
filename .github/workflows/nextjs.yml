@@ -58,6 +58,8 @@ jobs:
         run: npx next build
       - name: Static HTML export with Next.js
         run: npx next export
+      - name: Generate Sitemap
+        run: npx next-sitemap
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
