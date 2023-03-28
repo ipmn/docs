@@ -1,0 +1,19 @@
+# SSL Certificate
+
+SSL certificate checks are a network monitoring method specifically designed to assess the validity and security of SSL/TLS certificates used in secure web services. SSL (Secure Sockets Layer) and TLS (Transport Layer Security) are cryptographic protocols that provide secure communication between a client and a server over the internet. Websites and web services use SSL/TLS certificates to ensure the authenticity, confidentiality, and integrity of data transmitted between users and servers.
+
+Here's how SSL certificate checks work:
+
+- **Certificate Retrieval**: The SSL certificate check begins by connecting to the target web service using HTTPS and retrieving the SSL/TLS certificate presented by the server.
+
+- **Hostname Verification**: The check confirms that the hostname (domain name) in the SSL/TLS certificate matches the target web service's domain. This step ensures that the certificate has been issued explicitly for the web service being monitored and prevents man-in-the-middle attacks.
+
+- **Subject Alternative Names (SANs)**: The check verifies that the certificate is valid for all listed domain names in the Subject Alternative Names (SANs) field.
+
+- **Issuer**: The check ensures that the SSL/TLS certificate has been issued by a trusted Certificate Authority.
+
+- **Validity Period**: The check verifies that the certificate is within its validity period by comparing the current date and time with the certificate's "Not Before" and "Not After" timestamps.
+
+- **Certificate Signature**: The check ensures that the certificate's digital signature is valid and has been signed by a trusted CA. This validation process confirms the certificate's authenticity and integrity.
+
+In summary, SSL certificate checks play a crucial role in monitoring the security and validity of SSL/TLS certificates used by web services. These checks help maintain user trust, data security, and ensure the proper functioning of secure web services.
